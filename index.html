@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação: Partícula em uma Caixa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Simulação de Partícula em uma Caixa 1D</h1>
+    <form id="inputForm" action="results.html" method="GET">
+        <label for="L">Largura da Caixa (L):</label>
+        <input type="number" id="L" name="L" required><br>
+
+        <label for="ni">Nível Inicial (ni):</label>
+        <input type="number" id="ni" name="ni" required><br>
+
+        <label for="nf">Nível Final (nf):</label>
+        <input type="number" id="nf" name="nf" required><br>
+
+        <label for="a">A (limite inferior):</label>
+        <input type="number" id="a" name="a" required><br>
+
+        <label for="b">B (limite superior):</label>
+        <input type="number" id="b" name="b" required><br>
+
+        <button type="submit" onclick="calculate()">Calcular</button>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>
