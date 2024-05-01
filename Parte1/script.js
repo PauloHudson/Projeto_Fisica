@@ -7,14 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
 function processResults() {
     const urlParams = new URLSearchParams(window.location.search);
     const L = parseFloat(urlParams.get('L')) || 0;
+    const n = parseFloat(urlParams.get('n')) || 0;
     const ni = parseInt(urlParams.get('ni')) || 0;
     const nf = parseInt(urlParams.get('nf')) || 0;
     const a = parseFloat(urlParams.get('a')) || 0;
     const b = parseFloat(urlParams.get('b')) || 0;
 
     const hbar = 1.055e-34; // Joule segundo
-    let m = 9.109e-31; // Massa do elétron em kg ou massa do próton em kg
+    const m =  1.67E-27; // Massa do elétron em kg ou massa do próton em kg
     const h = 6.626e-34; // Constante de Planck
+    const h2 = 4.136e-15; // Constante de Planck em eV
     const eV = 1.602e-19; // Joule por electron volt
     const c = 3e8; // Velocidade da luz em m/s
 
@@ -24,32 +26,35 @@ function processResults() {
         return Math.sqrt(2/L);
     }
     function psiK(ni) {
-        return ((ni+1) * Math.PI) / L;
+        return ((ni) * Math.PI) / L;
     }
 //-------------------------------------------------------------------------------------------------------------------------------------------//
-    function energy(n) {
-        return n * n * Math.PI * Math.PI * hbar * hbar / (2 * m * L * L);
+    function energy(ni) {
+        if (nf!==0) {
+        E1= ((ni**2) * (h**2)) / ((8 * m) * (L**2));
+        E2=((nf ** 2) * (h ** 2) )/ ((8 * m) * (L**2));
+        EfotonAbs= ((Math.abs(E2 - E1)))/eV;
+        return EfotonAbs;}
+        else {
+            E1= ((ni**2) * (h**2)) / ((8 * m) * (L**2));
+            return E1;
+        }
     }
 
-    function deBroglieWavelength(n) {
-        const En = energy(n);
-        return h / Math.sqrt(2 * m * En);
+    function frequency(ni) {
+        return energy(ni) / h2; // Frequência do fóton
     }
 
-    function photonEnergy(Ei, Ef) {
-        return Math.abs(Ef - Ei); // Energia do fóton
+    function velocidade(ni){
+        return Math.sqrt((2*energy(ni))/m); // Velocidade do fóton
     }
 
-    function frequency(E_photon) {
-        return E_photon / h; // Frequência do fóton
+    function comprimentoOnda(ni){
+        return (h2 * c) / energy(ni); // Comprimento de onda do fó
     }
 
-    function wavelengthPhoton(f) {
-        return c / f; // Comprimento de onda do fóton
-    }
-
-    function particleVelocity(E) {
-        return Math.sqrt(2 * E / m); // Velocidade da partícula
+    function comprimentoBroglie(ni){
+        return h / Math.sqrt(2 * m * energy(ni)); // Comprimento de onda de Broglie
     }
 
     function probability(n, a, b) {
@@ -67,7 +72,13 @@ function processResults() {
     results.innerHTML = `
         <h3>Função de Onda Quântica</h3>
         <p>ψ_${ni}(x) = ${Math.floor(psiA(L))} sin(${Math.floor(psiK(ni))} * X)</p>
-        
+        <h3>Transição de Energia</h3>
+        <p>Efoton = ${(energy(ni)).toExponential(2)} J</p>
+        <p>Efoton = ${(energy(ni)).toExponential(2)} eV</p>
+        <p>f = ${frequency(ni).toExponential(2)} Hz</p>
+        <p>v = ${velocidade(ni).toExponential(2)} m/s</p>
+        <p>λ = ${comprimentoOnda(ni).toExponential(2)} m</p>
+        <p>λ de Broglie = ${comprimentoBroglie(ni).toExponential(2)} m</p>
     `;
 }
 
