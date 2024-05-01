@@ -14,7 +14,7 @@ function processResults() {
     const b = parseFloat(urlParams.get('b')) || 0;
 
     const hbar = 1.055e-34; // Joule segundo
-    const m =  1.67E-27; // Massa do elétron em kg ou massa do próton em kg
+    const m =  9.11e-31; // Massa do elétron em kg ou massa do próton em kg
     const h = 6.626e-34; // Constante de Planck
     const h2 = 4.136e-15; // Constante de Planck em eV
     const eV = 1.602e-19; // Joule por electron volt
@@ -73,7 +73,7 @@ function processResults() {
         <h3>Função de Onda Quântica</h3>
         <p>ψ_${ni}(x) = ${Math.floor(psiA(L))} sin(${Math.floor(psiK(ni))} * X)</p>
         <h3>Transição de Energia</h3>
-        <p>Efoton = ${(energy(ni)).toExponential(2)} J</p>
+        <p>Efoton = ${(energy(ni)/eV).toExponential(2)} J</p>
         <p>Efoton = ${(energy(ni)).toExponential(2)} eV</p>
         <p>f = ${frequency(ni).toExponential(2)} Hz</p>
         <p>v = ${velocidade(ni).toExponential(2)} m/s</p>
