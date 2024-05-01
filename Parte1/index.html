@@ -9,11 +9,15 @@
 <body>
     <h1>Simulação de Partícula em uma Caixa 1D</h1>
     <form id="inputForm" action="results.html" method="GET">
-        <label for="particle">Escolha a partícula:</label>
-        <input type="radio" id="proton" name="particle" value="proton">
-        <label for="proton">Próton</label>
-        <input type="radio" id="electron" name="particle" value="electron">
-        <label for="electron">Elétron</label><br>
+        <label for="particle" id="particula">Escolha a partícula:</label>
+        <div id="Eletrons" class="radio-buttons">
+            <input type="radio" id="proton" name="particle" value="proton">
+            <label for="proton">Próton</label>
+            <input type="radio" id="electron" name="particle" value="electron">
+            <label for="electron">Elétron</label>
+        </div>
+        
+       
 
         <label for="L">Largura da Caixa (L):</label>
         <input type="number" id="L" name="L" step="any"><br>

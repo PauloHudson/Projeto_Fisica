@@ -58,6 +58,9 @@ h1 {
     margin-bottom: 20px;
     color: white;
 }
+#particula{
+    font-size: 20px;
+}
 
 #results {
     background-color: rgba(255, 255, 255, 0.3); 
@@ -70,4 +73,51 @@ h1 {
 
 #results:hover {
     background-color: rgba(255, 255, 255, 0.4); 
+}
+
+.radio-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 3px; 
+    align-items: center; 
+}
+
+.radio-buttons input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 35px; 
+    height: 35px; 
+    background-color: #f0f0f0; 
+    border: 2px solid #007BFF; 
+    border-radius: 2px; 
+    cursor: pointer;
+    margin-top: 20px;
+    margin-right: 10px; 
+    transition: background-color 0.3s ease; 
+}
+
+.radio-buttons input[type="radio"]:checked {
+    background-color: #007BFF; 
+    border-color: none; 
+}
+
+.radio-buttons label {
+    padding: 1px 10px; 
+    border: 2px solid transparent; 
+    border-radius: 2px; 
+    font-size: 25px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2); 
+    cursor: pointer;
+    transition: all 0.3s ease; 
+}
+
+.radio-buttons label:hover,
+.radio-buttons input[type="radio"]:hover + label {
+    background-color: rgba(255, 255, 255, 0.3); 
+    border-color: #007BFF; 
+}
+
+.radio-buttons input[type="radio"]:focus + label {
+    outline: none; 
 }
