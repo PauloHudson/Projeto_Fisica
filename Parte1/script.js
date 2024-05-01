@@ -4,22 +4,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
 function processResults() {
     const urlParams = new URLSearchParams(window.location.search);
-    const L = parseFloat(urlParams.get('L')) || 0;
-    const n = parseFloat(urlParams.get('n')) || 0;
-    const ni = parseInt(urlParams.get('ni')) || 0;
-    const nf = parseInt(urlParams.get('nf')) || 0;
-    const a = parseFloat(urlParams.get('a')) || 0;
-    const b = parseFloat(urlParams.get('b')) || 0;
+    const L = parseFloat(urlParams.get('L'));
+    const ni = parseInt(urlParams.get('ni'));
+    const nf = parseInt(urlParams.get('nf'));
+    const a = parseFloat(urlParams.get('a'));
+    const b = parseFloat(urlParams.get('b'));
+    const m = parseFloat(urlParams.get('m')); // Obtém a massa da URL
+
+    console.log("Massa recebida:", m);
 
     const hbar = 1.055e-34; // Joule segundo
-    const m =  1.67E-27; // Massa do elétron em kg ou massa do próton em kg
     const h = 6.626e-34; // Constante de Planck
     const h2 = 4.136e-15; // Constante de Planck em eV
     const eV = 1.602e-19; // Joule por electron volt
     const c = 3e8; // Velocidade da luz em m/s
-
+    console.log(m)
     
     
     function psiA(L) {
@@ -99,6 +101,6 @@ document.getElementById('inputForm')?.addEventListener('submit', function(event)
         a: a,
         b: b
     }).toString();
-
+    console.log(m)
     window.location.href = `results.html?${params}`;
 });

@@ -10,15 +10,19 @@
     <h1>Simulação de Partícula em uma Caixa 1D</h1>
     <form id="inputForm" action="results.html" method="GET">
         <label for="particle" id="particula">Escolha a partícula:</label>
+
+
         <div id="Eletrons" class="radio-buttons">
             <input type="radio" id="proton" name="particle" value="proton">
+
             <label for="proton">Próton</label>
+
             <input type="radio" id="electron" name="particle" value="electron">
+
             <label for="electron">Elétron</label>
+
         </div>
         
-       
-
         <label for="L">Largura da Caixa (L):</label>
         <input type="number" id="L" name="L" step="any"><br>
 
@@ -38,4 +42,45 @@
     </form>
     <script src="script.js"></script>
 </body>
+<Script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const mProton = 1.67E-27; // Massa do próton em kg.
+    const mElectron = 9.11E-31; // Massa do elétron em kg.
+    let m = mProton; // Inicializa com a massa do próton
+
+
+    document.querySelectorAll('input[name="particle"]').forEach(selector => {
+        selector.addEventListener('change', function() {
+            m = (this.value === 'proton') ? mProton : mElectron;
+            console.log('Massa atualizada:', m); // Para verificar a atualização da massa
+        });
+    });
+
+
+    document.getElementById('inputForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const L = parseFloat(document.getElementById('L').value);
+        const ni = parseInt(document.getElementById('ni').value);
+        const nf = parseInt(document.getElementById('nf').value);
+        const a = parseFloat(document.getElementById('a').value);
+        const b = parseFloat(document.getElementById('b').value);
+
+
+        const params = new URLSearchParams({
+            L: L,
+            ni: ni,
+            nf: nf,
+            a: a,
+            b: b,
+            m: m  
+        });
+
+
+        window.location.href = `results.html?${params.toString()}`;
+    });
+});
+</script>
+
+
 </html>
