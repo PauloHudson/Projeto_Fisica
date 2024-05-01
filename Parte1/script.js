@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function processResults() {
     const urlParams = new URLSearchParams(window.location.search);
-    const L = parseFloat(urlParams.get('L'));
-    const ni = parseInt(urlParams.get('ni'));
-    const nf = parseInt(urlParams.get('nf'));
-    const a = parseFloat(urlParams.get('a'));
-    const b = parseFloat(urlParams.get('b'));
-    const m = parseFloat(urlParams.get('m')); // Obtém a massa da URL
+    const L = parseFloat(urlParams.get('L')) || 0;
+    const ni = parseInt(urlParams.get('ni')) || 0;
+    const nf = parseInt(urlParams.get('nf')) || 0;
+    const a = parseFloat(urlParams.get('a')) || 0;
+    const b = parseFloat(urlParams.get('b')) || 0;
+    const m = parseFloat(urlParams.get('m')) || 0; // Obtém a massa da URL
 
     console.log("Massa recebida:", m);
 
@@ -75,7 +75,7 @@ function processResults() {
         <h3>Função de Onda Quântica</h3>
         <p>ψ_${ni}(x) = ${Math.floor(psiA(L))} sin(${Math.floor(psiK(ni))} * X)</p>
         <h3>Transição de Energia</h3>
-        <p>Efoton = ${(energy(ni)/eV).toExponential(2)} J</p>
+        <p>Efoton = ${(energy(ni)*eV).toExponential(2)} J</p>
         <p>Efoton = ${(energy(ni)).toExponential(2)} eV</p>
         <p>f = ${frequency(ni).toExponential(2)} Hz</p>
         <p>v = ${velocidade(ni).toExponential(2)} m/s</p>
