@@ -6,10 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function processResults() {
     const urlParams = new URLSearchParams(window.location.search);
-    const A = parseFloat(urlParams.get('A'));
-    const K = parseFloat(urlParams.get('K'));
-    const Xp = parseFloat(urlParams.get('Xp'));
-    
+    const A = parseFloat(urlParams.get('A')) || 0; 
+    const K = parseFloat(urlParams.get('K')) || 0; 
+    const Xp = parseFloat(urlParams.get('Xp')) || 0; 
 
     const hbar = 1.055e-34; // Joule segundo
     const m = 9.109e-31; // Massa do elétron em kg
@@ -18,7 +17,7 @@ function processResults() {
     const c = 3e8; // Velocidade da luz em m/s
 
     function Largura(A) {
-        return (2 / (A ** 2)) * 1e9;
+        return ((2 / (A ** 2)) * 1e9).toFixed(2); // Mostra apenas 3 números após a vírgula
     }
 
     function NumeroAtomico(K,A) { 
@@ -27,7 +26,7 @@ function processResults() {
     }
 
     function Probabilidade(Xp) {
-        return A**2 * Math.sin(K * Xp * (Largura(A) * 1e-9))**2;
+        return Math.floor(A**2 * Math.sin(K * Xp * (Largura(A) * 1e-9))**2); // Remove qualquer coisa após a vírgula
     }
 
     const results = document.getElementById('results');
@@ -46,9 +45,9 @@ function processResults() {
 document.getElementById('inputForm')?.addEventListener('submit', function(event) {
     event.preventDefault();
     const form = event.target;
-    const A = parseFloat(form.elements['A'].value); // Acesso ao valor do campo A
-    const K = parseFloat(form.elements['K'].value); // Acesso ao valor do campo K
-    const Xp = parseFloat(form.elements['Xp'].value); // Acesso ao valor do campo Xp (se necessário)
+    const A = parseFloat(form.elements['A'].value) || 0; // Se não houver valor, define como 0
+    const K = parseFloat(form.elements['K'].value) || 0; // Se não houver valor, define como 0
+    const Xp = parseFloat(form.elements['Xp'].value) || 0; // Se não houver valor, define como 0
     
     const params = new URLSearchParams({
         A: A,
