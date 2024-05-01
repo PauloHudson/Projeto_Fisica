@@ -13,7 +13,17 @@ function processResults() {
     const b = parseFloat(urlParams.get('b'));
 
     const hbar = 1.055e-34; // Joule segundo
-    const m = 9.109e-31; // Massa do elétron em kg
+    let m; // Massa do elétron em kg ou massa do próton em kg
+
+    document.getElementById('electron').addEventListener('click', function() {
+    m = 9.109e-31; // Massa do elétron em kg
+    processResults();
+});
+
+    document.getElementById('proton').addEventListener('click', function() {
+    m = 1.673e-27; // Massa do próton em kg
+    processResults();
+});
     const h = 6.626e-34; // Constante de Planck
     const eV = 1.602e-19; // Joule por electron volt
     const c = 3e8; // Velocidade da luz em m/s
