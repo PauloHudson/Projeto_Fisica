@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function processResults() {
     const urlParams = new URLSearchParams(window.location.search);
     const A = parseFloat(urlParams.get('A'));
-    //const K = parseInt(urlParams.get('K'));
-    //const Xp = parseInt(urlParams.get('Xp'));
+    const K = parseFloat(urlParams.get('K'));
+    const Xp = parseFloat(urlParams.get('Xp'));
     
 
     const hbar = 1.055e-34; // Joule segundo
@@ -21,21 +21,23 @@ function processResults() {
         return (2 / (A ** 2)) * 1e9;
     }
 
-    function energy(n, L) { // Adicionando L como parâmetro
-        return n * n * Math.PI * Math.PI * hbar * hbar / (2 * m * L * L); // Usando L
+    function NumeroAtomico(K,A) { 
+        let result = (K * (Largura(A))*1e-9)/Math.PI;
+        return result.toFixed(0); // Arredonda para 2 casas decimais
     }
 
-    function deBroglieWavelength(n) {
-        const En = energy(n, Largura(A)); // Usando Largura(A) como argumento
-        return h / Math.sqrt(2 * m * En);
+    function Probabilidade(Xp) {
+        return A**2 * Math.sin(K * Xp * (Largura(A) * 1e-9))**2;
     }
 
     const results = document.getElementById('results');
     if (results) { // Verifica se results é válido
         results.innerHTML = `
             <h3>Função de Onda Quântica</h3>
-            <p>Largura da Caixa: (${Largura(A)})</p>
-            <h3>Energias</h3>
+            <p>Largura da Caixa: (${Largura(A)}) nm</p>
+            <p>Número Atómico: (${NumeroAtomico(K,A)})</p>
+            <p>Probabilidade de encontrar a partícula na posição 𝑥_P : (${Probabilidade(Xp)})-dx</p>
+            
         `;
     }
 }
@@ -44,15 +46,14 @@ function processResults() {
 document.getElementById('inputForm')?.addEventListener('submit', function(event) {
     event.preventDefault();
     const form = event.target;
-    const A = parseFloat(form.A.value);
-    //const K = parseInt(form.K.value);
-    //const Xp = parseInt(form.Xp.value);
+    const A = parseFloat(form.elements['A'].value); // Acesso ao valor do campo A
+    const K = parseFloat(form.elements['K'].value); // Acesso ao valor do campo K
+    const Xp = parseFloat(form.elements['Xp'].value); // Acesso ao valor do campo Xp (se necessário)
     
-
     const params = new URLSearchParams({
         A: A,
-        //K: K,
-        //Xp: Xp,
+        K: K,
+        Xp: Xp,
     }).toString();
 
     window.location.href = `results.html?${params}`;
