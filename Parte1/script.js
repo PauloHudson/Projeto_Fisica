@@ -42,6 +42,17 @@ function processResults() {
             return E1;
         }
     }
+    function energy2(ni) {
+        if (nf!==0) {
+        E1= ((ni**2) * (h**2)) / ((8 * m) * (L**2));
+        E2=((nf ** 2) * (h ** 2) )/ ((8 * m) * (L**2));
+        EfotonAbs= ((Math.abs(E2 - E1)))/eV;
+        return EfotonAbs;}
+        else {
+            E1= ((ni**2) * (h**2)) / ((8 * m) * (L**2));
+            return E1/eV;
+        }
+    }
 
     function frequency(ni) {
         return energy(ni) / h2; // Frequência do fóton
@@ -77,6 +88,7 @@ function processResults() {
         <h3>Transição de Energia</h3>
         <p>Efoton = ${(energy(ni)*eV).toExponential(2)} J</p>
         <p>Efoton = ${(energy(ni)).toExponential(2)} eV</p>
+        <p>Efoton = ${(energy2(ni)).toExponential(2)} E1/eV</p>
         <p>f = ${frequency(ni).toExponential(2)} Hz</p>
         <p>v = ${velocidade(ni).toExponential(2)} m/s</p>
         <p>λ = ${comprimentoOnda(ni).toExponential(2)} m</p>
