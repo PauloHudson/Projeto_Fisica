@@ -12,7 +12,7 @@ body {
     text-align: center;
 }
 
-form {
+form, .Voltar {
     background: rgba(255, 255, 255, 0.2);
     padding: 20px;
     border-radius: 12px;
@@ -120,4 +120,23 @@ h1 {
 
 .radio-buttons input[type="radio"]:focus + label {
     outline: none; 
+}
+
+.Voltar{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 25px;
+    border-radius: 30px;
+    width: 100px;
+}
+.button{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.645);
+}
+.button:hover{
+    transition: all 0.3s ease; 
+    color: rgb(99, 23, 99);
 }
