@@ -4,24 +4,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+let urlParams = new URLSearchParams(window.location.search);
+let L = parseFloat(urlParams.get('L')) || 0;
+let ni = parseInt(urlParams.get('ni')) || 0;
+let nf = parseInt(urlParams.get('nf')) || 0;
+let a = parseFloat(urlParams.get('a')) || 0;
+let b = parseFloat(urlParams.get('b')) || 0;
+let m = parseFloat(urlParams.get('m')) || 0; // Obtém a massa da URL
+
+let variaveis = [L, ni, nf, a, b, m];
+
+const hbar = 1.055e-34; // Joule segundo
+const h = 6.626e-34; // Constante de Planck
+const h2 = 4.136e-15; // Constante de Planck em eV
+const eV = 1.602e-19; // Joule por electron volt
+const c = 3e8; // Velocidade da luz em m/s
 
 function processResults() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const L = parseFloat(urlParams.get('L')) || 0;
-    const ni = parseInt(urlParams.get('ni')) || 0;
-    const nf = parseInt(urlParams.get('nf')) || 0;
-    const a = parseFloat(urlParams.get('a')) || 0;
-    const b = parseFloat(urlParams.get('b')) || 0;
-    const m = parseFloat(urlParams.get('m')) || 0; // Obtém a massa da URL
-
-    console.log("Massa recebida:", m);
-
-    const hbar = 1.055e-34; // Joule segundo
-    const h = 6.626e-34; // Constante de Planck
-    const h2 = 4.136e-15; // Constante de Planck em eV
-    const eV = 1.602e-19; // Joule por electron volt
-    const c = 3e8; // Velocidade da luz em m/s
-    console.log(m)
     
     
     function psiA(L) {
@@ -94,17 +93,78 @@ function processResults() {
         <p>λ = ${comprimentoOnda(ni).toExponential(2)} m</p>
         <p>λ de Broglie = ${comprimentoBroglie(ni).toExponential(2)} m</p>
     `;
+
+    // Obtém uma referência para o elemento canvas
+var ctx = document.getElementById('meuGrafico').getContext('2d');
+
+// Gera os pontos da função seno
+var labels = [];
+var data = [];
+
+console.log("teste");
+console.log("L:", variaveis[0]);
+console.log("ni:", variaveis[1]);
+
+for (var x = 0; x <= L; x = x + L/1000) {
+    var psi = ((2 * Math.PI * x) / L); // Converte graus para radianos
+    var y = Math.sqrt(ni / L) * Math.sin(psi); // Função seno de x
+    labels.push(x);
+    data.push(y);
 }
+
+// Define os dados do gráfico
+var chartData = {
+    labels: labels,
+    datasets: [{
+        label: 'Função de Onda Quântica (ψ(x))',
+        data: data,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+    }]
+};
+
+// Configurações do gráfico
+var options = {
+    scales: {
+        xAxes: [{
+            scaleLabel: {
+                display: true,
+                labelString: 'Ângulo (graus)'
+            }
+        }],
+        yAxes: [{
+            scaleLabel: {
+                display: true,
+                labelString: 'Valor de sen(1)'
+            }
+        }]
+    }
+};
+
+// Cria o gráfico de linha
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: chartData,
+    options: options
+});
+}
+
+
+
+/////////////////////////////////
+
+
 
 // If the page is the input form, handle the form submission
 document.getElementById('inputForm')?.addEventListener('submit', function(event) {
     event.preventDefault();
-    const form = event.target;
-    const L = parseFloat(form.L.value);
-    const ni = parseInt(form.ni.value);
-    const nf = parseInt(form.nf.value);
-    const a = parseFloat(form.a.value);
-    const b = parseFloat(form.b.value);
+    form = event.target;
+    L = parseFloat(form.L.value);
+    ni = parseInt(form.ni.value);
+    nf = parseInt(form.nf.value);
+    a = parseFloat(form.a.value);
+    b = parseFloat(form.b.value);
 
     const params = new URLSearchParams({
         L: L,
