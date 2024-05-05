@@ -69,18 +69,19 @@ function processResults() {
     function comprimentoBroglie(ni){
         return h / Math.sqrt(2 * m * energy(ni)); // Comprimento de onda de Broglie
     }
-
-    function probability(n, a, b) {
-        let integral = 0;
-        const steps = 1000;
-        const dx = (b - a) / steps;
-        for (let i = 0; i <= steps; i++) {
-            const x = a + i * dx;
-            integral += psi(n, x) * psi(n, x) * dx;
-        }
-        return integral;
+    
+    function calculateProbability(L, ni, a, b) {
+        const A = Math.sqrt(2 / L);
+        const ki = (ni * Math.PI) / L;
+        const integral = (b - a - (1 / (2 * ki)) * (Math.sin(2 * ki * b) - Math.sin(2 * ki * a)));
+        const probability = Math.pow(A, 2) * integral;
+        return (probability * 100)/2; // Multiplicando por 100 para obter a probabilidade em porcentagem
     }
-
+    
+ 
+    
+    
+    
     const results = document.getElementById('results');
     results.innerHTML = `
         <h3>Função de Onda Quântica</h3>
@@ -93,6 +94,8 @@ function processResults() {
         <p>v = ${velocidade(ni).toExponential(2)} m/s</p>
         <p>λ = ${comprimentoOnda(ni).toExponential(2)} m</p>
         <p>λ de Broglie = ${comprimentoBroglie(ni).toExponential(2)} m</p>
+        <h3>Probabilidade de Encontrar a Partícula Entre a e b</h3>
+        <p>P = ${calculateProbability(L, ni, a, b).toFixed(2)}%</p>
     `;
 }
 
