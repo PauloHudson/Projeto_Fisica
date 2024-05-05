@@ -75,7 +75,7 @@ function processResults() {
         const ki = (ni * Math.PI) / L;
         const integral = (b - a - (1 / (2 * ki)) * (Math.sin(2 * ki * b) - Math.sin(2 * ki * a)));
         const probability = Math.pow(A, 2) * integral;
-        return (probability * 100)/2; // Multiplicando por 100 para obter a probabilidade em porcentagem
+        return (probability * 100)/2; 
     }
     
  
@@ -99,7 +99,7 @@ function processResults() {
     `;
 }
 
-// If the page is the input form, handle the form submission
+
 document.getElementById('inputForm')?.addEventListener('submit', function(event) {
     event.preventDefault();
     const form = event.target;
