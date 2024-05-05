@@ -68,18 +68,19 @@ function processResults() {
     function comprimentoBroglie(ni){
         return h / Math.sqrt(2 * m * energy(ni)); // Comprimento de onda de Broglie
     }
-
-    function probability(n, a, b) {
-        let integral = 0;
-        const steps = 1000;
-        const dx = (b - a) / steps;
-        for (let i = 0; i <= steps; i++) {
-            const x = a + i * dx;
-            integral += psi(n, x) * psi(n, x) * dx;
-        }
-        return integral;
+    
+    function calculateProbability(L, ni, a, b) {
+        const A = Math.sqrt(2 / L);
+        const ki = (ni * Math.PI) / L;
+        const integral = (b - a - (1 / (2 * ki)) * (Math.sin(2 * ki * b) - Math.sin(2 * ki * a)));
+        const probability = Math.pow(A, 2) * integral;
+        return (probability * 100)/2; 
     }
-
+    
+ 
+    
+    
+    
     const results = document.getElementById('results');
     results.innerHTML = `
         <h3>Função de Onda Quântica</h3>
@@ -94,7 +95,7 @@ function processResults() {
         <p>λ de Broglie = ${comprimentoBroglie(ni).toExponential(2)} m</p>
     `;
 
-    // Obtém uma referência para o elemento canvas
+// Obtém uma referência para o elemento canvas
 var ctx = document.getElementById('meuGrafico').getContext('2d');
 
 // Gera os pontos da função seno
@@ -156,7 +157,7 @@ var myChart = new Chart(ctx, {
 
 
 
-// If the page is the input form, handle the form submission
+
 document.getElementById('inputForm')?.addEventListener('submit', function(event) {
     event.preventDefault();
     form = event.target;

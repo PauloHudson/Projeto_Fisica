@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('input[name="particle"]').forEach(selector => {
         selector.addEventListener('change', function() {
             m = (this.value === 'proton') ? mProton : mElectron;
-            console.log('Massa atualizada:', m); // Para verificar a atualização da massa
+            console.log('Massa atualizada:', m); 
         });
     });
 

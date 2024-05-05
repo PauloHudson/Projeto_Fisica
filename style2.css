@@ -45,7 +45,7 @@ body2 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    text-decoration: none; /* Remove sublinhado de links */
+    text-decoration: none; 
 }
 
 .button:hover {
@@ -96,6 +96,8 @@ p {
     background-color: rgb(255, 255, 255);
     height: 100%;
     width: 40%;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
 }
 .black h1{
     color: #a777e3;
