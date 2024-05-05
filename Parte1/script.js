@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+function geraArquivo(l, ni){
+    console.log(l)
+}
+
 function processResults() {
     const urlParams = new URLSearchParams(window.location.search);
     const L = parseFloat(urlParams.get('L')) || 0;
@@ -21,9 +25,9 @@ function processResults() {
     const h2 = 4.136e-15; // Constante de Planck em eV
     const eV = 1.602e-19; // Joule por electron volt
     const c = 3e8; // Velocidade da luz em m/s
-    console.log(m)
-    
-    
+
+
+
     function psiA(L) {
         return Math.sqrt(2/L);
     }
@@ -93,7 +97,7 @@ function processResults() {
         <p>v = ${velocidade(ni).toExponential(2)} m/s</p>
         <p>λ = ${comprimentoOnda(ni).toExponential(2)} m</p>
         <p>λ de Broglie = ${comprimentoBroglie(ni).toExponential(2)} m</p>
-    `;
+    `;    
 }
 
 // If the page is the input form, handle the form submission
@@ -116,3 +120,6 @@ document.getElementById('inputForm')?.addEventListener('submit', function(event)
     console.log(m)
     window.location.href = `results.html?${params}`;
 });
+
+
+console.log(params)

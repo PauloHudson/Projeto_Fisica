@@ -1,0 +1,8 @@
+canvas{
+    background-image: url(./IMG.png);
+    background-color: #F0EBD8;
+    border: 1px black;
+    margin: 20px;
+    background-size: contain;
+    background-position: center;
+}
