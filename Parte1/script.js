@@ -96,12 +96,14 @@ function processResults() {
     `;
 
 // Obtém uma referência para o elemento canvas
-var ctx1 = document.getElementById('grafio-de-onda-quantica').getContext('2d');
+var ctx1 = document.getElementById('grafio-de-onda-quantica-inicial').getContext('2d');
 
 // Gera os pontos da função seno
 var labels = [];
 var data = [];
 var data2 = [];
+var data_f = [];
+var data2_f = [];
 
 for (var x = 0; x <= L; x = x + L/1000) {
     var psi = ((ni * Math.PI * x) / L); // Converte graus para radianos
@@ -111,11 +113,18 @@ for (var x = 0; x <= L; x = x + L/1000) {
     data2.push(y*y);
 }
 
+for (var x = 0; x <= L; x = x + L/1000) {
+    var psi = ((nf * Math.PI * x) / L); // Converte graus para radianos
+    var y = Math.sqrt(ni / L) * Math.sin(psi); // Função seno de x
+    data_f.push(y);
+    data2_f.push(y*y);
+}
+
 // Define os dados do gráfico
 var chartData1 = {
     labels: labels,
     datasets: [{
-        label: 'Função de Onda Quântica (ψ(x))',
+        label: 'Função de Onda Quântica para ni (ψ(x))',
         data: data,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
@@ -124,7 +133,7 @@ var chartData1 = {
 };
 
 // Configurações do gráfico
-var options1 = {
+var options = {
     scales: {
         xAxes: [{
             scaleLabel: {
@@ -142,16 +151,16 @@ var options1 = {
 };
 
 // Cria o gráfico de linha
-var myChart = new Chart(ctx1, {
+var GraficoFuncaoDeOndaInicial = new Chart(ctx1, {
     type: 'line',
     data: chartData1,
-    options: options1
+    options: options
 });
 
 /////////////////////////////////
 
 // Obtém uma referência para o elemento canvas
-var ctx2 = document.getElementById('grafio-de-distribuicao-de-probabilidade').getContext('2d');
+var ctx2 = document.getElementById('grafio-de-distribuicao-de-probabilidade-inicial').getContext('2d');
 
 // Define os dados do gráfico
 var chartData2 = {
@@ -165,30 +174,57 @@ var chartData2 = {
     }]
 };
 
-// Configurações do gráfico
-var options2 = {
-    scales: {
-        xAxes: [{
-            scaleLabel: {
-                display: true,
-                labelString: 'Ângulo (graus)'
-            }
-        }],
-        yAxes: [{
-            scaleLabel: {
-                display: true,
-                labelString: 'Valor de sen(1)'
-            }
-        }]
-    }
+// Cria o gráfico de linha
+var GraficoDistribuicaoDeProbabilidadeInicial = new Chart(ctx2, {
+    type: 'line',
+    data: chartData2,
+    options: options
+});
+
+// Obtém uma referência para o elemento canvas
+var ctx3 = document.getElementById('grafio-de-onda-quantica-final').getContext('2d');
+
+// Define os dados do gráfico
+var chartData3 = {
+    labels: labels,
+    datasets: [{
+        label: 'Função de Onda Quântica para ni (ψ(x)))',
+        data: data_f,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+    }]
 };
 
 // Cria o gráfico de linha
-var myChart = new Chart(ctx2, {
+var GraficoFuncaoDeOndaFinal = new Chart(ctx3, {
     type: 'line',
-    data: chartData2,
-    options: options2
+    data: chartData3,
+    options: options
 });
+
+// Obtém uma referência para o elemento canvas
+var ctx4 = document.getElementById('grafio-de-distribuicao-de-probabilidade-final').getContext('2d');
+
+// Define os dados do gráfico
+var chartData4 = {
+    labels: labels,
+    datasets: [{
+        label: 'Função de Onda Quântica para ni (ψ(x)))',
+        data: data2_f,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+    }]
+};
+
+// Cria o gráfico de linha
+var GraficoDistribuicaoDeProbabilidadeFinal = new Chart(ctx4, {
+    type: 'line',
+    data: chartData4,
+    options: options
+});
+
 }
 
 
