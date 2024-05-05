@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados da Simulação</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>Resultados da Simulação</h1>
     <div id="results"></div>
+    <div>
+        <canvas id="grafio-de-onda-quantica-inicial" height="400pxpx" width="400px" style=" background-color: aliceblue;"></canvas>
+        <canvas id="grafio-de-distribuicao-de-probabilidade-inicial" height="400px" width="400px" style=" background-color: aliceblue; margin-top: 20px;"></canvas>
+
+        <canvas id="grafio-de-onda-quantica-final" height="400px" width="400px" style=" background-color: aliceblue; margin-top: 20px;"></canvas>
+        <canvas id="grafio-de-distribuicao-de-probabilidade-final" height="400px" width="400px" style=" background-color: aliceblue; margin-top: 20px;"></canvas>
+    </div>
     <script src="script.js"></script>
     <div class="Voltar">
         <a href="graficos.html" class="button">Exibir graficos</a>

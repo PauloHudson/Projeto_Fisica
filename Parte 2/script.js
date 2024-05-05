@@ -41,7 +41,7 @@ function processResults() {
     }
 }
 
-// If the page is the input form, handle the form submission
+
 document.getElementById('inputForm')?.addEventListener('submit', function(event) {
     event.preventDefault();
     const form = event.target;
