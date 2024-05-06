@@ -172,7 +172,7 @@ var ctx2 = document.getElementById('grafio-de-distribuicao-de-probabilidade-inic
 var chartData2 = {
     labels: labels,
     datasets: [{
-        label: 'Distribuição de probabilidade (|ψ(x)|²)',
+        label: 'Distribuição de probabilidade ni(|ψ(x)|²)',
         data: data2,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
@@ -194,7 +194,7 @@ var ctx3 = document.getElementById('grafio-de-onda-quantica-final').getContext('
 var chartData3 = {
     labels: labels,
     datasets: [{
-        label: 'Função de Onda Quântica para ni (ψ(x)))',
+        label: 'Função de Onda Quântica para nf (ψ(x)))',
         data: data_f,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
@@ -216,7 +216,7 @@ var ctx4 = document.getElementById('grafio-de-distribuicao-de-probabilidade-fina
 var chartData4 = {
     labels: labels,
     datasets: [{
-        label: 'Função de Onda Quântica para ni (ψ(x)))',
+        label: 'Distribuição de probabilidade nf (|ψ(x)|²)',
         data: data2_f,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
