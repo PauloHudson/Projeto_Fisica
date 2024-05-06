@@ -139,3 +139,15 @@ h1 {
     transition: all 0.3s ease; 
     color: rgb(99, 23, 99);
 }
+#graficos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+canvas {
+    max-width: 400px; /* Defina a largura máxima desejada para os canvas */
+    width: 100%; /* Isso garante que os canvas não ultrapassem o tamanho máximo definido */
+    height: auto; /* O height: auto; permite que a altura seja ajustada automaticamente de acordo com a largura */
+}
