@@ -151,3 +151,10 @@ canvas {
     width: 100%; /* Isso garante que os canvas não ultrapassem o tamanho máximo definido */
     height: auto; /* O height: auto; permite que a altura seja ajustada automaticamente de acordo com a largura */
 }
+
+#descricao {
+background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
