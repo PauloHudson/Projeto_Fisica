@@ -12,6 +12,8 @@ let a = parseFloat(urlParams.get('a')) || 0;
 let b = parseFloat(urlParams.get('b')) || 0;
 let m = parseFloat(urlParams.get('m')) || 0; // Obtém a massa da URL
 
+
+
 let variaveis = [L, ni, nf, a, b, m];
 
 const hbar = 1.055e-34; // Joule segundo
@@ -93,8 +95,12 @@ function processResults() {
         <p>v = ${velocidade(ni).toExponential(2)} m/s</p>
         <p>λ = ${comprimentoOnda(ni).toExponential(2)} m</p>
         <p>λ de Broglie = ${comprimentoBroglie(ni).toExponential(2)} m</p>
+        <h3>Probabilidade de Encontrar a Partícula Entre a e b</h3>
+        <p>P = ${calculateProbability(L, ni, a, b).toFixed(2)}%</p>
     `;
 
+
+    
 // Obtém uma referência para o elemento canvas
 var ctx1 = document.getElementById('grafio-de-onda-quantica-inicial').getContext('2d');
 
@@ -128,7 +134,7 @@ var chartData1 = {
         data: data,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
+        borderWidth: 0.01
     }]
 };
 
@@ -170,7 +176,7 @@ var chartData2 = {
         data: data2,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
+        borderWidth: 0.01
     }]
 };
 
@@ -192,7 +198,7 @@ var chartData3 = {
         data: data_f,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
+        borderWidth: 0.01
     }]
 };
 
@@ -214,7 +220,7 @@ var chartData4 = {
         data: data2_f,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
+        borderWidth: 0.01
     }]
 };
 
@@ -240,6 +246,15 @@ document.getElementById('inputForm')?.addEventListener('submit', function(event)
     a = parseFloat(form.a.value);
     b = parseFloat(form.b.value);
 
+    // Verificar se os valores de a e b estão dentro do intervalo correto
+    if (ni < 0 || ni > 1 || nf < 0 || nf > 1) {
+        ni = 0;
+        nf = 0;
+        alert("Os valores de Ni e Nf devem estar dentro do intervalo [0, 1]. \n Valores de Ni e Nf alterados para 0\n Aperte em Voltar e Refaça a conta com valores possiveis");
+        // Não faz nada adicional para impedir que o formulário seja enviado
+        return; // Encerra a execução da função para evitar que o código continue
+    }
+
     const params = new URLSearchParams({
         L: L,
         ni: ni,
@@ -250,3 +265,4 @@ document.getElementById('inputForm')?.addEventListener('submit', function(event)
     console.log(m)
     window.location.href = `results.html?${params}`;
 });
+
