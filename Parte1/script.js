@@ -247,7 +247,7 @@ document.getElementById('inputForm')?.addEventListener('submit', function(event)
     b = parseFloat(form.b.value);
 
     // Verificar se os valores de a e b estão dentro do intervalo correto
-    if (ni < 0 || ni > 1 || nf < 0 || nf > 1) {
+    if (ni < 1 || ni > 7 || nf < 1 || nf > 7) {
         ni = 0;
         nf = 0;
         alert("Os valores de Ni e Nf devem estar dentro do intervalo [0, 1]. \n Valores de Ni e Nf alterados para 0\n Aperte em Voltar e Refaça a conta com valores possiveis");
